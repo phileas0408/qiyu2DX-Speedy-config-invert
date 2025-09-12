@@ -34,13 +34,13 @@ const uint8_t SW_KEYCODE[] = {HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4,
 /* Notes of my GPIO mapping on my pi picos
 Do not change here, this is only a comment, scroll to the section below
 
-P1_SW1 = "GPIO10"
-P1_SW2 = "GPIO13"
-P1_SW3 = "GPIO11"
+P1_SW1 = "GPIO8"
+P1_SW2 = "GPIO7"
+P1_SW3 = "GPIO12"
 P1_SW4 = "GPIO9"
-P1_SW5 = "GPIO12"
-P1_SW6 = "GPIO7"
-P1_SW7 = "GPIO8"
+P1_SW5 = "GPIO11"
+P1_SW6 = "GPIO13"
+P1_SW7 = "GPIO10"
 
 P2_SW1 = "GPIO13"
 P2_SW2 = "GPIO10"
@@ -55,13 +55,13 @@ P2_SW7 = "GPIO11"
 #if (CONTROLLER_SIDE == 1)
 // P1
 const uint8_t SW_GPIO[] = {
-    10, // SW1
-    13, // SW2
-    11, // SW3
-    9,  // SW4
-    12, // SW5
-    7,  // SW6
-    8,  // SW7
+    8,
+    7,
+    12,
+    9,
+    11,
+    13,
+    10,
     27, // Button 8 (INFINITAS), do not modify!!
 };
 const uint8_t LED_GPIO[] = {
