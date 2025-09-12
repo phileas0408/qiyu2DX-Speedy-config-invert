@@ -1,8 +1,8 @@
 #ifndef CONTROLLER_CONFIG_H
 #define CONTROLLER_CONFIG_H
 
-#define SW_GPIO_SIZE 7               // Number of switches
-#define LED_GPIO_SIZE 7              // Number of switch LEDs
+#define SW_GPIO_SIZE 8               // Number of switches
+#define LED_GPIO_SIZE 8              // Number of switch LEDs
 #define ENC_GPIO_SIZE 1              // Number of encoders
 #define ENC_PPR 72                   // Encoder PPR
 #define MOUSE_SENS 1                 // Mouse sensitivity multiplier
@@ -62,15 +62,17 @@ const uint8_t SW_GPIO[] = {
     12, // SW5
     7,  // SW6
     8,  // SW7
+    27, // Button 8 (INFINITAS), do not modify!!
 };
 const uint8_t LED_GPIO[] = {
-    3, // LED1
-    6, // LED2
-    4, // LED3
-    2, // LED4
-    5, // LED5
-    0, // LED6
-    1, // LED7
+    3,  // LED1
+    6,  // LED2
+    4,  // LED3
+    2,  // LED4
+    5,  // LED5
+    0,  // LED6
+    1,  // LED7
+    25, // Button 8 (INFINITAS), do not modify!!
 };
 #else
 // P2
@@ -82,6 +84,7 @@ const uint8_t SW_GPIO[] = {
     7,  // SW5
     12, // SW6
     11, // SW7
+    27, // Button 8 (INFINITAS), do not modify!!
 };
 const uint8_t LED_GPIO[] = {
     6, // LED1
@@ -91,6 +94,7 @@ const uint8_t LED_GPIO[] = {
     0, // LED5
     5, // LED6
     4, // LED7
+    25, // Button 8 (INFINITAS), do not modify!!
 };
 #endif
 const uint8_t ENC_GPIO[] = {14}; // L_ENC(0, 1); R_ENC(2, 3)
