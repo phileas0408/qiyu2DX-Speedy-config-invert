@@ -15,13 +15,25 @@
 #define WS2812B_LEDS_PER_ZONE \
   WS2812B_LED_SIZE / WS2812B_LED_ZONES // Number of LEDs per zone
 
+// Tina added configuration options:
+// You can also -DCONTROLLER_SIDE=VALUE in the cmake CLI instead, see
+// build.sh for an example
+#ifndef CONTROLLER_SIDE
+#define CONTROLLER_SIDE 1
+#endif
+
+#define SPOOF_KONAMI_CONTROLLER true // change to true or false
+#define CUSTOM_VID 0xCafe // ignored if SPOOF_KONAMI_CONTROLLER is true
+
 #ifdef PICO_GAME_CONTROLLER_C
 
 // MODIFY KEYBINDS HERE, MAKE SURE LENGTHS MATCH SW_GPIO_SIZE
 const uint8_t SW_KEYCODE[] = {HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4,
                               HID_KEY_5, HID_KEY_6, HID_KEY_7};
 
-/*
+/* Notes of my GPIO mapping on my pi picos
+Do not change here, this is only a comment, scroll to the section below
+
 P1_SW1 = "GPIO10"
 P1_SW2 = "GPIO13"
 P1_SW3 = "GPIO11"
@@ -29,8 +41,7 @@ P1_SW4 = "GPIO9"
 P1_SW5 = "GPIO12"
 P1_SW6 = "GPIO7"
 P1_SW7 = "GPIO8"
-*/
-/*
+
 P2_SW1 = "GPIO13"
 P2_SW2 = "GPIO10"
 P2_SW3 = "GPIO9"
@@ -39,47 +50,49 @@ P2_SW5 = "GPIO7"
 P2_SW6 = "GPIO12"
 P2_SW7 = "GPIO11"
 */
+
+// UPDATE YOUR MAPPINGS HERE
+#if (CONTROLLER_SIDE == 1)
 // P1
-// const uint8_t SW_GPIO[] = {
-//     10,
-//     13,
-//     11,
-//     9,
-//     12,
-//     7,
-//     8,
-// };
-// const uint8_t LED_GPIO[] = {
-//     3,
-//     6,
-//     4,
-//     2,
-//     5,
-//     0,
-//     1,
-// };
-/* */
-/* */
-// P2
 const uint8_t SW_GPIO[] = {
-    13,
-    10,
-    9,
-    8,
-    7,
-    12,
-    11,
+    10, // SW1
+    13, // SW2
+    11, // SW3
+    9,  // SW4
+    12, // SW5
+    7,  // SW6
+    8,  // SW7
 };
 const uint8_t LED_GPIO[] = {
-    6, // SW1
-    3, // SW2
-    2, // SW3
-    1, // SW4
-    0, // SW5
-    5, // SW6
-    4, // SW7
+    3, // LED1
+    6, // LED2
+    4, // LED3
+    2, // LED4
+    5, // LED5
+    0, // LED6
+    1, // LED7
 };
-/* */
+#else
+// P2
+const uint8_t SW_GPIO[] = {
+    13, // SW1
+    10, // SW2
+    9,  // SW3
+    8,  // SW4
+    7,  // SW5
+    12, // SW6
+    11, // SW7
+};
+const uint8_t LED_GPIO[] = {
+    6, // LED1
+    3, // LED2
+    2, // LED3
+    1, // LED4
+    0, // LED5
+    5, // LED6
+    4, // LED7
+};
+#endif
 const uint8_t ENC_GPIO[] = {14}; // L_ENC(0, 1); R_ENC(2, 3)
 const bool ENC_REV[] = {false};  // Reverse Encoders
 const uint8_t WS2812B_GPIO = 28;

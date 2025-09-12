@@ -27,6 +27,15 @@
 
 #include "tusb.h"
 
+// Tina added defines
+#if (CONTROLLER_SIDE == 1)
+#define CONTROLLER_NAME "Arcade P1"
+#define CONTROLLER_SERIAL "573572"
+#else
+#define CONTROLLER_NAME "Arcade P2"
+#define CONTROLLER_SERIAL "573573"
+#endif
+
 /* A combination of interfaces must have a unique product id, since PC will save
  * device driver after the first plug. Same VID/PID with different interface e.g
  * MSC (first), then CDC (later) will possibly cause system error on PC.
@@ -51,8 +60,13 @@ tusb_desc_device_t const desc_device_joy = {
     .bDeviceProtocol = 0x00,
     .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
 
-    .idVendor = 0xCafe,
+    #if (!SPOOF_KONAMI_CONTROLLER)
+    .idVendor = CUSTOM_VID,
     .idProduct = USB_PID,
+    #else
+    .idVendor = 0x1ccf,
+    .idProduct = 0x8048,
+    #endif
     .bcdDevice = 0x0100,
 
     .iManufacturer = 0x01,
@@ -70,8 +84,13 @@ tusb_desc_device_t const desc_device_key = {
     .bDeviceProtocol = 0x00,
     .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
 
-    .idVendor = 0xCafe,
+    #if (!SPOOF_KONAMI_CONTROLLER)
+    .idVendor = CUSTOM_VID,
     .idProduct = USB_PID,
+    #else
+    .idVendor = 0x1ccf,
+    .idProduct = 0x8048,
+    #endif
     .bcdDevice = 0x0100,
 
     .iManufacturer = 0x01,
@@ -156,11 +175,10 @@ uint8_t const* tud_descriptor_configuration_cb(uint8_t index) {
 // array of pointer to string descriptors
 char const* string_desc_arr[] = {
     (const char[]){0x09, 0x04}, // 0: is supported language is English (0x0409)
+    # if (!SPOOF_KONAMI_CONTROLLER) 
     "SpeedyAmeto",              // 1: Manufacturer
-    // "Arcade P1",                // 2: Product (P1)
-    "Arcade P2",                // 2: Product (P2)
-    // "573572",                   // 3: Serials, should use chip ID (P1)
-    "573573",                   // 3: Serials, should use chip ID (P2)
+    CONTROLLER_NAME,            // 2: Product
+    CONTROLLER_SERIAL,          // 3: Serials, should use chip ID (P2)
     "Button 1",
     "Button 2",
     "Button 3",
@@ -171,6 +189,23 @@ char const* string_desc_arr[] = {
     "Button 8",
     "Button 9",
     "Button 10",
+    #else
+    "Konami Amusement",                         // 1: Manufacturer
+    "beatmania IIDX controller premium model",  // 2: Product
+    "123456",                                   // 3: Serials, should use chip ID
+    "Key 1",
+    "Key 2",
+    "Key 3",
+    "Key 4",
+    "Key 5",
+    "Key 6",
+    "Key 7",
+    "UNUSED GPIO 27",
+    "Key E1",
+    "Key E2",
+    "Key E3",
+    "Key E4",
+    #endif
     "Red 1",
     "Green 1",
     "Blue 1",
