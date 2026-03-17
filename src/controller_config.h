@@ -1,8 +1,8 @@
 #ifndef CONTROLLER_CONFIG_H
 #define CONTROLLER_CONFIG_H
 
-#define SW_GPIO_SIZE 8               // Number of switches
-#define LED_GPIO_SIZE 8              // Number of switch LEDs
+#define SW_GPIO_SIZE 11               // Number of switches
+#define LED_GPIO_SIZE 11              // Number of switch LEDs
 #define ENC_GPIO_SIZE 1              // Number of encoders
 #define ENC_PPR 72                   // Encoder PPR
 #define MOUSE_SENS 1                 // Mouse sensitivity multiplier
@@ -10,8 +10,8 @@
 #define SW_DEBOUNCE_TIME_US 4000     // Switch debounce delay in us
 #define ENC_PULSE (ENC_PPR * 4)      // 4 pulses per PPR
 #define REACTIVE_TIMEOUT_MAX 1000000 // HID to reactive timeout in us
-#define WS2812B_LED_SIZE 0           // Number of WS2812B LEDs
-#define WS2812B_LED_ZONES 2          // Number of WS2812B LED Zones
+#define WS2812B_LED_SIZE 45           // Number of WS2812B LEDs
+#define WS2812B_LED_ZONES 1          // Number of WS2812B LED Zones
 #define WS2812B_LEDS_PER_ZONE \
   WS2812B_LED_SIZE / WS2812B_LED_ZONES // Number of LEDs per zone
 
@@ -29,27 +29,8 @@
 
 // MODIFY KEYBINDS HERE, MAKE SURE LENGTHS MATCH SW_GPIO_SIZE
 const uint8_t SW_KEYCODE[] = {HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4,
-                              HID_KEY_5, HID_KEY_6, HID_KEY_7};
-
-/* Notes of my GPIO mapping on my pi picos
-Do not change here, this is only a comment, scroll to the section below
-
-P1_SW1 = "GPIO7"
-P1_SW2 = "GPIO8"
-P1_SW3 = "GPIO9"
-P1_SW4 = "GPIO10"
-P1_SW5 = "GPIO11"
-P1_SW6 = "GPIO12"
-P1_SW7 = "GPIO13"
-
-P2_SW1 = "GPIO7"
-P2_SW2 = "GPIO8"
-P2_SW3 = "GPIO9"
-P2_SW4 = "GPIO10"
-P2_SW5 = "GPIO11"
-P2_SW6 = "GPIO12"
-P2_SW7 = "GPIO13"
-*/
+                              HID_KEY_5, HID_KEY_6, HID_KEY_7, 
+                              HID_KEY_Z, HID_KEY_A, HID_KEY_B, HID_KEY_C};
 
 // UPDATE YOUR MAPPINGS HERE
 #if (CONTROLLER_SIDE == 1)
@@ -63,6 +44,9 @@ const uint8_t SW_GPIO[] = {
     12,
     13,
     27, // Button 8 (INFINITAS), do not modify!!
+    16,
+    17,
+    18,
 };
 const uint8_t LED_GPIO[] = {
     6,  // LED1
@@ -73,6 +57,9 @@ const uint8_t LED_GPIO[] = {
     1,  // LED6
     0,  // LED7
     25, // Button 8 (INFINITAS), do not modify!!
+    20,
+    21,
+    22,
 };
 #else
 // P2
@@ -85,6 +72,9 @@ const uint8_t SW_GPIO[] = {
     12,
     13,
     27, // Button 8 (INFINITAS), do not modify!!
+    16,
+    17,
+    18,
 };
 const uint8_t LED_GPIO[] = {
     6,  // LED1
@@ -95,6 +85,9 @@ const uint8_t LED_GPIO[] = {
     1,  // LED6
     0,  // LED7
     25, // Button 8 (INFINITAS), do not modify!!
+    20,
+    21,
+    22,
 };
 #endif
 const uint8_t ENC_GPIO[] = {14}; // L_ENC(0, 1); R_ENC(2, 3)
