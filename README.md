@@ -13,3 +13,4 @@ noir : ground
 jaune : +12V  
 rouge : pins lumières  
 blanc : pins boutons  
+
